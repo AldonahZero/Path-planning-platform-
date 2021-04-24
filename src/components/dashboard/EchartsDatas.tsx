@@ -278,6 +278,7 @@ const EchartsDatas: React.FC = () => {
         ],
     };
     let count;
+    
     const [option, setOption] = useState(DEFAULT_OPTION);
     function fetchNewData() {
         const dataMune = () => get({ url: config.DATA_API });
@@ -319,7 +320,7 @@ const EchartsDatas: React.FC = () => {
             
             loadingOption={loadingOption}
             // showLoading={true}
-            onChartReady={onChartReady}
+            // onChartReady={onChartReady}
         />
     );
 };

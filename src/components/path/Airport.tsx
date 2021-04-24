@@ -10,52 +10,78 @@ import MyAirportDrawer from '../ui/MyAirportDrawer';
 
 const options = [
     {
-        value: 'DJ无人机',
-        label: 'DJ无人机',
+        value: '固定翼无人机',
+        label: '固定翼无人机',
         children: [
             {
-                value: '固定翼无人机',
-                label: '固定翼无人机',
+                value: '固定翼无人机 SC02',
+                label: '固定翼无人机 SC02',
                 children: [
                     {
-                        value: '固定翼无人机 SC02',
-                        label: '固定翼无人机 SC02',
+                        value: '可见光',
+                        label: '可见光',
+                    },
+                    {
+                        value: '红外',
+                        label: '红外',
+                    },
+                    {
+                        value: '高光谱',
+                        label: '高光谱',
+                    },
+                    {
+                        value: 'SAR',
+                        label: 'SAR',
                     },
                 ],
             },
             {
-                value: '多旋翼无人机',
-                label: '多旋翼无人机',
+                value: '固定翼无人机 SC01',
+                label: '固定翼无人机 SC01',
                 children: [
                     {
-                        value: '多旋翼无人机 SC01',
-                        label: '多旋翼无人机 SC01',
+                        value: '可见光',
+                        label: '可见光',
+                    },
+                    {
+                        value: '红外',
+                        label: '红外',
+                    },
+                    {
+                        value: '高光谱',
+                        label: '高光谱',
+                    },
+                    {
+                        value: 'SAR',
+                        label: 'SAR',
                     },
                 ],
             },
         ],
     },
     {
-        value: '自家无人机',
-        label: '自家无人机',
+        value: '多旋翼无人机',
+        label: '多旋翼无人机',
         children: [
             {
-                value: '固定翼无人机',
-                label: '固定翼无人机',
+                value: '多旋翼无人机 SC01',
+                label: '多旋翼无人机 SC01',
                 children: [
                     {
-                        value: '固定翼无人机 SC02',
-                        label: '固定翼无人机 SC02',
+                        value: '可见光',
+                        label: '可见光',
                     },
-                ],
-            },
-            {
-                value: '多旋翼无人机',
-                label: '多旋翼无人机',
-                children: [
                     {
-                        value: '多旋翼无人机 SC01',
-                        label: '多旋翼无人机 SC01',
+                        value: '红外',
+                        label: '红外',
+                    },
+                    {
+                        value: '高光谱',
+                        label: '高光谱',
+                    },
+                    {
+                        value: 'SAR',
+                        label: 'SAR',
                     },
                 ],
             },
@@ -71,23 +97,13 @@ const Airport = () => {
     return (
         <div className="gutter-example">
             <Row gutter={16}>
-                <Col className="gutter-row" md={3}>
+                <Col className="gutter-row" md={6}>
                     <div className="gutter-box">
                         <Card title="无人机面板" bordered={false}>
                             <img src={b1} className="img-responsive img-circle" alt="test" />
                             <Cascader options={options} onChange={onChange} changeOnSelect />
                         </Card>
-                    </div>
-                </Col>
-                <Col className="gutter-row" md={15}>
-                    <div className="gutter-box">
-                        <Card title="地图面板" bordered={false}>
-                            <Index />
-                        </Card>
-                    </div>
-                </Col>
-                <Col className="gutter-row" md={6}>
-                    <Card title="路径规划面板">
+                        <Card title="路径规划面板">
                         <Descriptions
                             title="飞行信息"
                             bordered
@@ -122,15 +138,21 @@ const Airport = () => {
                             <Tag color="#108ee9">#108ee9</Tag>
                         </div>
                     </Card>
-                </Col>
-            </Row>
-            <Row gutter={16}>
-            <Col className="gutter-row" md={3}>
-                    <div className="gutter-box">
-                        
                     </div>
                 </Col>
-                <Col className="gutter-row" md={15}>
+                <Col className="gutter-row" md={18}>
+                    <div className="gutter-box">
+                        <Card title="地图面板" bordered={false}>
+                            <Index />
+                        </Card>
+                    </div>
+                </Col>
+                
+            </Row>
+            <Row gutter={16}>
+            <Col className="gutter-row" md={20}>
+               </Col>
+                <Col className="gutter-row" md={16}>
                     <div className="gutter-box"></div>
                     {/* <Card title="风场面板" bordered={false}>
                             

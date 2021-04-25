@@ -1,21 +1,25 @@
-import React from 'react';
-import ReactQMap from 'react-qmap';
+import React,{Component} from 'react';
+import data from '../../../Amap_PathPlanning/test/index.js';
+// import { ToolBarControl } from '@uiw/react-amap';
+import {Map,MouseTool} from 'react-amap';
 
-const getContianer = (dom: any) => {
-    const middleControl = document.createElement('div');
-    middleControl.style.cssText =
-        'width: 22px;height: 30px;position: absolute;left: 50%;top: 50%;z-index: 999;margin-left: -23px;margin-top: -23px;';
-    middleControl.innerHTML = `<img src="${require('../../../style/imgs/spot_location.png')}" style="width: 100%;height: 100%;" />`;
-    dom.appendChild(middleControl);
-};
+class Data extends Component {
+    render() {
+        return (
+            <div style={{width: '100%', height: '500px'}}>
+        <iframe
+        title="resg"
+        srcDoc={data}
+        style={{ width: '100%', border: '0px', height: '1100px' }}
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+        scrolling="auto"
+      />
 
-export default () => (
-    <ReactQMap
-        center={{ latitude: 30.53786, longitude: 104.07265 }}
-        initialOptions={{ zoomControl: true, mapTypeControl: true }}
-        apiKey="UN6BZ-MP2W6-XWCSX-M2ATU-QORGZ-OWFOE"
-        style={{ height: 500 }}
-        mySpot={{ latitude: 30.53786, longitude: 104.07265 }}
-        getContainer={getContianer}
-    />
-);
+     {/* <Map amapkey={'788e08def03f95c670944fe2c78fa76f'}
+      center={{longitude: 116.212034, latitude: 39.933657}}
+      zoom={11}/> */}
+    </div>
+        )
+    }
+}
+export default Data;

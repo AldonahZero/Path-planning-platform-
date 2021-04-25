@@ -1,5 +1,6 @@
 import React from 'react';
 import Tencent from './Tencent';
+import ThisApp from './Map';
 import { Row, Col, Card } from 'antd';
 import BreadcrumbCustom from '../../widget/BreadcrumbCustom';
 
@@ -11,7 +12,8 @@ const Index = () => (
             <Col md={24}>
                 <div style={{ height: 700 }}>
                     <Card bordered={false} title="街道地图/卫星地图">
-                        <Tencent />
+                        {/* <Tencent /> */}
+                        <ThisApp/>
                     </Card>
                 </div>
             </Col>

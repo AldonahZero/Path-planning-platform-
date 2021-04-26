@@ -117,7 +117,12 @@ class ThisApp extends React.Component {
         return (
             <div>
                 <div style={{ width: '100%', height: 500 }}>
-                    <Map plugins={this.mapPlugins} center={this.mapCenter} zoom={18} amapkey={'b3711b3d91abf28ac9e9403ffc5299b5'}>
+                    <Map
+                        plugins={this.mapPlugins}
+                        center={this.mapCenter}
+                        zoom={18}
+                        amapkey={'b3711b3d91abf28ac9e9403ffc5299b5'}
+                    >
                         <MouseTool events={this.toolEvents} />
                     </Map>
                 </div>
@@ -155,6 +160,14 @@ class ThisApp extends React.Component {
                     }}
                 >
                     关闭鼠标工具
+                </Button>
+                <Button
+                    onClick={() => {
+                        window.location.href =
+                            'http://localhost:3006/Amap_PathPlanning/test/index.lbs.html';
+                    }}
+                >
+                    全屏展示
                 </Button>
             </div>
         );

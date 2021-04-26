@@ -117,7 +117,7 @@ class ThisApp extends React.Component {
         return (
             <div>
                 <div style={{ width: '100%', height: 500 }}>
-                    <Map plugins={this.mapPlugins} center={this.mapCenter} zoom={18}>
+                    <Map plugins={this.mapPlugins} center={this.mapCenter} zoom={18} amapkey={'b3711b3d91abf28ac9e9403ffc5299b5'}>
                         <MouseTool events={this.toolEvents} />
                     </Map>
                 </div>

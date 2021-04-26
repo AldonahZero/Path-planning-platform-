@@ -2,7 +2,7 @@
  * .
  */
 import React from 'react';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Button } from 'antd';
 import EchartsArea from './EchartsArea';
 import EchartsPie from './EchartsPie';
 import EchartsEffectScatter from './EchartsEffectScatter';
@@ -52,7 +52,8 @@ class Echarts extends React.Component {
     </Descriptions>
                         </Card>
                         <Card title="路径规划">
-                            <MyDrawer/>
+                            {/* <MyDrawer/> */}
+                            <Button type="primary" onClick={()=>{window.location.href="http://localhost:3006/Amap_PathPlanning/test/index.lbs.html"}}>路径规划</Button>
                             <Divider orientation="left">Presets</Divider>
     <div>
       <Tag color="magenta">magenta</Tag>

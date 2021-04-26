@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import data from '../../../Amap_PathPlanning/test/index.js';
+// import data from '../../../../public/Amap_PathPlanning/test/index.js.js';
 // import { ToolBarControl } from '@uiw/react-amap';
 import { Map, MouseTool } from 'react-amap';
 

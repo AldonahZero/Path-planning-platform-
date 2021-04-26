@@ -14,6 +14,7 @@ import {
     Slider,
     Button,
     Upload,
+    message,
     Rate,
     Checkbox,
     Row,
@@ -23,6 +24,22 @@ import {
   import MyRater from '../ui/MyRate'
   import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
   
+  const flieProps = {
+    name: 'file',
+    multiple: true,
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    onChange(info: any) {
+      const { status } = info.file;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
 
 const SmenuSub1 = () => {
 
@@ -42,6 +59,7 @@ const SmenuSub1 = () => {
       };
 
     const onFinish = (values: any) => {
+        // 发送数据请求
           console.log('Received values of form: ', values);
     };
     return (
@@ -56,6 +74,7 @@ const SmenuSub1 = () => {
         'checkbox-group': ['A', 'B'],
         rate: 3.5,
       }}
+    //   action={'https://www.mocky.io/v2/5cc8019d300000980a055e76'}
     >
       <Form.Item label="上传图片">
         <span className="ant-form-text">上传图片</span>
@@ -182,7 +201,7 @@ const SmenuSub1 = () => {
 
       <Form.Item label="Dragger">
         <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
-          <Upload.Dragger name="files" action="/upload.do">
+          <Upload.Dragger {...flieProps }>
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
             </p>
@@ -194,7 +213,7 @@ const SmenuSub1 = () => {
 
       <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          提交
         </Button>
       </Form.Item>
     </Form>

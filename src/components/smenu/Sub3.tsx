@@ -63,59 +63,64 @@ class SmenuSub3 extends React.Component {
         if (!this.gallery) return;
         this.gallery.close();
     };
+            // ];
     render() {
         const { Meta } = Card;
         const { Countdown } = Statistic;
         const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Moment is also OK
         let imgs = [
             [
-                "http://127.0.0.1:5000/images/AANAP-skyline/skyline1.png",
-                "http://127.0.0.1:5000/images/AANAP-skyline/skyline0.png",
-                "http://127.0.0.1:5000/images/AANAP-skyline/skyline2.png",
-                "http://127.0.0.1:5000/images/AANAP-skyline/skyline3.png"
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline1.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline0.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline2.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline3.png"
             ],
             [
-                "http://127.0.0.1:5000/images/AANAP-skyline/skyline1.png",
-                "http://127.0.0.1:5000/images/AANAP-skyline/skyline0.png",
-                "http://127.0.0.1:5000/images/AANAP-skyline/skyline2.png",
-                "http://127.0.0.1:5000/images/AANAP-skyline/skyline3.png"
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline1.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline0.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline2.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline3.png"
+            ],
+            [
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline1.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline0.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline2.png",
+                "http://127.0.0.1:5000/static/images/AANAP-skyline/skyline3.png"
             ]
-        ];
-        const npmDependencies = () =>
-            axios
-                .get('/getAllImages')
-                .then(function (res) {
-                    
-                    imgs = res.data.data;
-                    console.log(imgs)
-                })
-                .catch((err) => console.log(err));
-        npmDependencies();
+        ]
+        // let [imgs, setImgs] = useState([[]]);
 
-        const imgsTag = imgs.map((v1) =>
-            v1.map((v2) => (
-                <div className="gutter-box" key={v2}>
-                    <Card hoverable actions={[<Checkbox></Checkbox>]}>
-                        <div>
-                            <img
-                                onClick={() => this.openGallery(v2)}
-                                alt="example"
-                                width="100%"
-                                src={v2}
-                            />
-                        </div>
-                        <Meta
-                            avatar={
-                                <Avatar src="https://img0.baidu.com/it/u=4270496049,167206765&fm=26&fmt=auto&gp=0.jpg" />
-                            }
-                            title="Dev"
-                            description="多波段数据与路径分析"
-                        />
-                    </Card>
-                </div>
-            ))
-        );
-        console.log(imgsTag)
+
+        // useEffect(() => {
+        //     const fetchData = async () => {
+        //       const result = await axios(
+        //         '/getAllImages',
+        //       );
+         
+        //       setImgs(result.data);
+        //     };
+         
+        //     fetchData();
+        //   }, [[]]);
+
+        // const npmDependencies = () =>
+        //     axios
+        //         .get('/getAllImages')
+        //         .then(function (res) {
+                    
+        //             imgs = res.data.data;
+        //             console.log(imgs)
+        //         })
+        //         .catch((err) => console.log(err));
+        // npmDependencies();
+
+        // const imgsTag = imgs.map((v1) =>
+        //     v1.map((v2) => (
+
+        //     ))
+        // );
+        // console.log(imgsTag)
+        console.log(imgs)
         return (
             <div className="gutter-example button-demo">
                 <BreadcrumbCustom breads={['图片拼接', '服务端图片列表']} />
@@ -126,7 +131,7 @@ class SmenuSub3 extends React.Component {
                     <Row gutter={16}>
                         <Descriptions title="文档信息">
                             <Col span={8}>
-                                <Countdown title="文件总计" value={deadline} format="SSS GB" />
+                                <Countdown title="文件总计" value={deadline} format="SSS B" />
                             </Col>
                             <Col span={8}>
                                 <Countdown title="搜索耗时" value={deadline} />
@@ -151,11 +156,29 @@ class SmenuSub3 extends React.Component {
                     </Row>
                 </Card>
                 <Row gutter={10}>
-                    {imgsTag.map((it,index)=>(
-                        <Col className="gutter-row" md={4}>
-                        {it}
-                        </Col>
-                    ))}
+                    {imgs.map((v1) =>
+            v1.map((v2) => (
+                <div className="gutter-box" key={v2}>
+                    <Card hoverable actions={[<Checkbox></Checkbox>]}>
+                        <div>
+                            <img
+                                onClick={() => this.openGallery(v2)}
+                                alt="example"
+                                width="100%"
+                                src={v2}
+                            />
+                        </div>
+                        <Meta
+                            avatar={
+                                <Avatar src="https://img0.baidu.com/it/u=4270496049,167206765&fm=26&fmt=auto&gp=0.jpg" />
+                            }
+                            title="Dev"
+                            description="多波段数据与路径分析"
+                        />
+                    </Card>
+                </div>
+            ))
+        )}
                 </Row>
                 <div
                     className="pswp"

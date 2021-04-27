@@ -167,7 +167,15 @@ class ThisApp extends React.Component {
                             'http://localhost:3006/Amap_PathPlanning/test/index.lbs.html';
                     }}
                 >
-                    全屏展示
+                    牛耕法全屏展示
+                </Button>
+                <Button
+                    onClick={() => {
+                        window.location.href =
+                            'http://localhost:3006/rf/rf/rf.html';
+                    }}
+                >
+                    绕飞法全屏展示
                 </Button>
             </div>
         );

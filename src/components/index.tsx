@@ -32,6 +32,7 @@ import Sub1 from './smenu/Sub1';
 import Sub2 from './smenu/Sub2';
 import SmenuSub3 from './smenu/Sub3';
 import Sub3 from './path/Sub3';
+import Success from './result/Success'
 import Env from './env';
 import Airport from './path/Airport';
 
@@ -71,6 +72,7 @@ export default {
     Sub2,
     SmenuSub3,
     Sub3,
+    Success,
     Airport,
     Env,
 } as any;

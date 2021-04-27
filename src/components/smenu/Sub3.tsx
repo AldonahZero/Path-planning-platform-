@@ -1,7 +1,7 @@
 /**
  *
  */
-import React from 'react';
+import React,  { useState, useEffect } from 'react';
 import { Row, Col, Card, Statistic } from 'antd';
 import BreadcrumbCustom from '../widget/BreadcrumbCustom';
 import PhotoSwipe from 'photoswipe';
@@ -19,9 +19,10 @@ import {
     ClockCircleOutlined,
     MinusCircleOutlined,
 } from '@ant-design/icons';
+import axios from 'axios';
 
 class SmenuSub3 extends React.Component {
-    state = {
+     state = {
         gallery: null,
     };
     componentDidMount() {}
@@ -66,51 +67,31 @@ class SmenuSub3 extends React.Component {
         const { Meta } = Card;
         const { Countdown } = Statistic;
         const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Moment is also OK
-
-        const imgs = [
+        let imgs = [
             [
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.agrs.cgs.gov.cn%2Fyyly%2F201608%2FW020160818633425497845.jpg&refer=http%3A%2F%2Fwww.agrs.cgs.gov.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744894&t=e3baebea6534f20bf388c8e87eac3b71',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200414%2F9026a4b3b8df4d459c740ed954dc4a99.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=c38f46f95e069d1b415b7cec8eade373',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_jpg%2Fiaqqcc0RDB60jqeoGCcREG79sytRphDqbAFdv9ec6DlSa0Q1vB7x3OKSBVdicrQUgNWyK0nQYxyLF0YhIWKMvJKA%2F0%3Fwx_fmt%3Djpeg&refer=http%3A%2F%2Fmmbiz.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=7fc0b8a001f3f678f7784adf68965677',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180523%2F60b4199bfdd244eaa7d9fefd38e44bd3.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=870e0d1345a6b71c8e4b361265e56d48',
-                'https://img2.baidu.com/it/u=2531178202,2979573512&fm=26&fmt=auto&gp=0.jpg',
+                "http://127.0.0.1:5000/images/AANAP-skyline/skyline1.png",
+                "http://127.0.0.1:5000/images/AANAP-skyline/skyline0.png",
+                "http://127.0.0.1:5000/images/AANAP-skyline/skyline2.png",
+                "http://127.0.0.1:5000/images/AANAP-skyline/skyline3.png"
             ],
             [
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.agrs.cgs.gov.cn%2Fyyly%2F201608%2FW020160818633425497845.jpg&refer=http%3A%2F%2Fwww.agrs.cgs.gov.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744894&t=e3baebea6534f20bf388c8e87eac3b71',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200414%2F9026a4b3b8df4d459c740ed954dc4a99.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=c38f46f95e069d1b415b7cec8eade373',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_jpg%2Fiaqqcc0RDB60jqeoGCcREG79sytRphDqbAFdv9ec6DlSa0Q1vB7x3OKSBVdicrQUgNWyK0nQYxyLF0YhIWKMvJKA%2F0%3Fwx_fmt%3Djpeg&refer=http%3A%2F%2Fmmbiz.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=7fc0b8a001f3f678f7784adf68965677',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180523%2F60b4199bfdd244eaa7d9fefd38e44bd3.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=870e0d1345a6b71c8e4b361265e56d48',
-                'https://img2.baidu.com/it/u=2531178202,2979573512&fm=26&fmt=auto&gp=0.jpg',
-            ],
-            [
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.agrs.cgs.gov.cn%2Fyyly%2F201608%2FW020160818633425497845.jpg&refer=http%3A%2F%2Fwww.agrs.cgs.gov.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744894&t=e3baebea6534f20bf388c8e87eac3b71',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200414%2F9026a4b3b8df4d459c740ed954dc4a99.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=c38f46f95e069d1b415b7cec8eade373',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_jpg%2Fiaqqcc0RDB60jqeoGCcREG79sytRphDqbAFdv9ec6DlSa0Q1vB7x3OKSBVdicrQUgNWyK0nQYxyLF0YhIWKMvJKA%2F0%3Fwx_fmt%3Djpeg&refer=http%3A%2F%2Fmmbiz.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=7fc0b8a001f3f678f7784adf68965677',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180523%2F60b4199bfdd244eaa7d9fefd38e44bd3.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=870e0d1345a6b71c8e4b361265e56d48',
-                'https://img2.baidu.com/it/u=2531178202,2979573512&fm=26&fmt=auto&gp=0.jpg',
-            ],
-            [
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.agrs.cgs.gov.cn%2Fyyly%2F201608%2FW020160818633425497845.jpg&refer=http%3A%2F%2Fwww.agrs.cgs.gov.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744894&t=e3baebea6534f20bf388c8e87eac3b71',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200414%2F9026a4b3b8df4d459c740ed954dc4a99.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=c38f46f95e069d1b415b7cec8eade373',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_jpg%2Fiaqqcc0RDB60jqeoGCcREG79sytRphDqbAFdv9ec6DlSa0Q1vB7x3OKSBVdicrQUgNWyK0nQYxyLF0YhIWKMvJKA%2F0%3Fwx_fmt%3Djpeg&refer=http%3A%2F%2Fmmbiz.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=7fc0b8a001f3f678f7784adf68965677',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180523%2F60b4199bfdd244eaa7d9fefd38e44bd3.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=870e0d1345a6b71c8e4b361265e56d48',
-                'https://img2.baidu.com/it/u=2531178202,2979573512&fm=26&fmt=auto&gp=0.jpg',
-            ],
-            [
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.agrs.cgs.gov.cn%2Fyyly%2F201608%2FW020160818633425497845.jpg&refer=http%3A%2F%2Fwww.agrs.cgs.gov.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744894&t=e3baebea6534f20bf388c8e87eac3b71',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200414%2F9026a4b3b8df4d459c740ed954dc4a99.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=c38f46f95e069d1b415b7cec8eade373',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_jpg%2Fiaqqcc0RDB60jqeoGCcREG79sytRphDqbAFdv9ec6DlSa0Q1vB7x3OKSBVdicrQUgNWyK0nQYxyLF0YhIWKMvJKA%2F0%3Fwx_fmt%3Djpeg&refer=http%3A%2F%2Fmmbiz.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=7fc0b8a001f3f678f7784adf68965677',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180523%2F60b4199bfdd244eaa7d9fefd38e44bd3.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=870e0d1345a6b71c8e4b361265e56d48',
-                'https://img2.baidu.com/it/u=2531178202,2979573512&fm=26&fmt=auto&gp=0.jpg',
-            ],
-            [
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.agrs.cgs.gov.cn%2Fyyly%2F201608%2FW020160818633425497845.jpg&refer=http%3A%2F%2Fwww.agrs.cgs.gov.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744894&t=e3baebea6534f20bf388c8e87eac3b71',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200414%2F9026a4b3b8df4d459c740ed954dc4a99.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=c38f46f95e069d1b415b7cec8eade373',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_jpg%2Fiaqqcc0RDB60jqeoGCcREG79sytRphDqbAFdv9ec6DlSa0Q1vB7x3OKSBVdicrQUgNWyK0nQYxyLF0YhIWKMvJKA%2F0%3Fwx_fmt%3Djpeg&refer=http%3A%2F%2Fmmbiz.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=7fc0b8a001f3f678f7784adf68965677',
-                'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180523%2F60b4199bfdd244eaa7d9fefd38e44bd3.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620744512&t=870e0d1345a6b71c8e4b361265e56d48',
-                'https://img2.baidu.com/it/u=2531178202,2979573512&fm=26&fmt=auto&gp=0.jpg',
-            ],
+                "http://127.0.0.1:5000/images/AANAP-skyline/skyline1.png",
+                "http://127.0.0.1:5000/images/AANAP-skyline/skyline0.png",
+                "http://127.0.0.1:5000/images/AANAP-skyline/skyline2.png",
+                "http://127.0.0.1:5000/images/AANAP-skyline/skyline3.png"
+            ]
         ];
+        const npmDependencies = () =>
+            axios
+                .get('/getAllImages')
+                .then(function (res) {
+                    
+                    imgs = res.data.data;
+                    console.log(imgs)
+                })
+                .catch((err) => console.log(err));
+        npmDependencies();
+
         const imgsTag = imgs.map((v1) =>
             v1.map((v2) => (
                 <div className="gutter-box" key={v2}>
@@ -134,6 +115,7 @@ class SmenuSub3 extends React.Component {
                 </div>
             ))
         );
+        console.log(imgsTag)
         return (
             <div className="gutter-example button-demo">
                 <BreadcrumbCustom breads={['图片拼接', '服务端图片列表']} />
@@ -169,24 +151,11 @@ class SmenuSub3 extends React.Component {
                     </Row>
                 </Card>
                 <Row gutter={10}>
-                    <Col className="gutter-row" md={4}>
-                        {imgsTag[0]}
-                    </Col>
-                    <Col className="gutter-row" md={4}>
-                        {imgsTag[1]}
-                    </Col>
-                    <Col className="gutter-row" md={4}>
-                        {imgsTag[2]}
-                    </Col>
-                    <Col className="gutter-row" md={4}>
-                        {imgsTag[3]}
-                    </Col>
-                    <Col className="gutter-row" md={4}>
-                        {imgsTag[4]}
-                    </Col>
-                    <Col className="gutter-row" md={4}>
-                        {imgsTag[5]}
-                    </Col>
+                    {imgsTag.map((it,index)=>(
+                        <Col className="gutter-row" md={4}>
+                        {it}
+                        </Col>
+                    ))}
                 </Row>
                 <div
                     className="pswp"

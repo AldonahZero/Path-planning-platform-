@@ -181,6 +181,12 @@
         "component": "Cssmodule"
     }, 
     {
+        "key": "/app/result", 
+        "title": "结果", 
+        "icon": "star", 
+        "component": "Success"
+    }, 
+    {
         "key": "/app/extension", 
         "title": "功能扩展", 
         "icon": "bars", 

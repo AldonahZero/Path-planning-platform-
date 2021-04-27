@@ -19,7 +19,7 @@ import {
     Checkbox,
     Row,
     Col,
-    Card,
+    notification,
   } from 'antd';
   import MyRater from '../ui/MyRate'
   import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
@@ -27,11 +27,25 @@ import {
   const flieProps = {
     name: 'file',
     multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    action: '/upload',
     onChange(info: any) {
       const { status } = info.file;
       if (status !== 'uploading') {
         console.log(info.file, info.fileList);
+        const key = `open${Date.now()}`;
+        const btn = (
+          <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            我知道了
+          </Button>
+        );
+        notification.open({
+          message: '文件上传中',
+          description:
+            '文件上传中',
+          btn,
+          key,
+          onClose: close,
+        });
       }
       if (status === 'done') {
         message.success(`${info.file.name} file uploaded successfully.`);
@@ -40,7 +54,27 @@ import {
       }
     },
   };
-
+  const close = () => {
+    console.log(
+      'Notification was closed. Either the close button was clicked or duration time elapsed.',
+    );
+  };
+  const openNotification = () => {
+    const key = `open${Date.now()}`;
+    const btn = (
+      <Button type="primary" size="small" onClick={() => notification.close(key)}>
+        我知道了
+      </Button>
+    );
+    notification.open({
+      message: '文件上传成功',
+      description:
+        '文件上传成功请前往服务端图片查看',
+      btn,
+      key,
+      onClose: close,
+    });
+  };
 const SmenuSub1 = () => {
 
     const { Option } = Select;
@@ -212,7 +246,7 @@ const SmenuSub1 = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" onClick={openNotification}>
           提交
         </Button>
       </Form.Item>
